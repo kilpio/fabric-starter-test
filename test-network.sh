@@ -21,10 +21,6 @@ echo "Test channel name= $TEST_CHANNEL_NAME" > "${output}"
 CHAINCODE_NAME=${CHAINCODE_NAME:-reference}
 echo "Chaincode name = $CHAINCODE_NAME" > "${output}"
 
-echo
-echo
-echo
-
 #orgs
 first_org=${1:-org1}
 second_org=${2:-org2}
@@ -34,6 +30,9 @@ export ORG=${ORG:-$first_org}
 export PEER0_PORT=${PEER0_PORT:7051}
 
 echo "Chaincode name = Running test for ${ORG}.${DOMAIN}" > "${output}"
+echo
+echo
+echo
 
 #
 # Running unit tests
