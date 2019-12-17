@@ -44,3 +44,7 @@ echo
 
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ./test-create-channel_org1.sh
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG2='org2' ./test-add-to-org1.sh
+  
+PEER0_PORT=7051 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org1 ./test-join-channel.sh 
+
+PEER0_PORT=8051 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org2 ./test-join-channel.sh 
