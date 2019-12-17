@@ -21,6 +21,9 @@ echo "Test channel name= $TEST_CHANNEL_NAME" > "${output}"
 CHAINCODE_NAME=${CHAINCODE_NAME:-reference}
 echo "Chaincode name = $CHAINCODE_NAME" > "${output}"
 
+echo
+echo
+echo
 
 #orgs
 first_org=${1:-org1}
