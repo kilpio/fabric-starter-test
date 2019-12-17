@@ -22,7 +22,7 @@ fi
 echo
 echo
 
-printInColor "1;36" "Installing and instantiating the <$CHAINCODE_NAME> to the <${TEST_CHANNEL_NAME}> channel..."
+printInColor "1;36" "Installing and instantiating the <$CHAINCODE_NAME> chaincode to the <${TEST_CHANNEL_NAME}> channel..."
 cd ..
 
 
