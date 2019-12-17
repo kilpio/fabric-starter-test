@@ -21,18 +21,13 @@ echo "Test channel name= $TEST_CHANNEL_NAME" > "${output}"
 CHAINCODE_NAME=${CHAINCODE_NAME:-reference}
 echo "Chaincode name = $CHAINCODE_NAME" > "${output}"
 
-#orgs
-first_org=${1:-org1}
-second_org=${2:-org2}
 
 export DOMAIN=${DOMAIN:-example.com}
-export ORG=${ORG:-$first_org}
+export ORG=${ORG:-org1}
 export PEER0_PORT=${PEER0_PORT:7051}
 
 echo "Chaincode name = Running test for ${ORG}.${DOMAIN}" > "${output}"
-echo
-echo
-echo
+echo; echo; echo; 
 
 #
 # Running unit tests
@@ -43,6 +38,7 @@ printYellow "------------------"
 echo
 
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ./test-create-channel_org1.sh
+
 
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG2='org2' ./test-add-to-org1.sh
   
