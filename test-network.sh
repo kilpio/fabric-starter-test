@@ -43,14 +43,13 @@ printYellow "------------------"
 echo
 
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ./test-create-channel_org1.sh
+
 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG2='org2' ./test-add-to-org1.sh
   
 PEER0_PORT=7051 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org1 ./test-join-channel.sh 
-
 PEER0_PORT=8051 TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org2 ./test-join-channel.sh 
 
 PEER0_PORT=7051 CHAINCODE_NAME=$CHAINCODE_NAME TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org1 ./test-chaincode-install-instantiate.sh
 PEER0_PORT=8051 CHAINCODE_NAME=$CHAINCODE_NAME TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG=org2 ./test-chaincode-install-instantiate.sh
-
 
 CHAINCODE_NAME=$CHAINCODE_NAME TEST_CHANNEL_NAME=$TEST_CHANNEL_NAME ORG1=org1 ORG2=org2 ./test-chaincode-data-exchange.sh
