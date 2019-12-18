@@ -1,38 +1,17 @@
 #!/bin/bash
 
-source ../lib/util/util.sh
-source ../lib.sh
+source ${BASEDIR}/../lib/util/util.sh
+source ${BASEDIR}/../lib.sh
 
-#TEST_CHANNEL_NAME='testlocal'$RANDOM
-#CHAINCODE_NAME=${CHAINCODE_NAME:-reference}
-DEBUG=${DEBUG:-false}
-ORG=${ORG:-org1}
-first_org=${1:-org1}
-second_org=${2:-org2}
+#DEBUG=${DEBUG:-false}
 
-DOMAIN=${DOMAIN:-example.com}
-#PEER0_PORT=${PEER0_PORT:7051}
+printInColor "1;36" "$ORG (Port:$PEER0_PORT) Installing and instantiating the <$CHAINCODE_NAME> chaincode to the <${TEST_CHANNEL_NAME}> channel..."
 
-if [ "$DEBUG" = "false" ]; then
-    output='/dev/null'
-else
-    output='/dev/stdout'
-fi
-
-echo
-echo
-
-printInColor "1;36" "Installing and instantiating the <$CHAINCODE_NAME> chaincode to the <${TEST_CHANNEL_NAME}> channel..."
-cd ..
-
-
-
-
-PEER0_PORT=$PEER0_PORT ORG=$ORG ./chaincode-instantiate.sh $TEST_CHANNEL_NAME $CHAINCODE_NAME 2>&1 >$output
+#echo "(cd ${BASEDIR}/.. && PEER0_PORT=$PEER0_PORT ORG=$ORG ./chaincode-instantiate.sh $TEST_CHANNEL_NAME $CHAINCODE_NAME | tee -a $FSTEST_LOG_FILE > "${output}")"
+(cd ${BASEDIR}/.. && PEER0_PORT=$PEER0_PORT ORG=$ORG ./chaincode-instantiate.sh $TEST_CHANNEL_NAME $CHAINCODE_NAME | tee -a $FSTEST_LOG_FILE > "${output}")
 
 #Wait for the chaincode to instantiate
 sleep 5
-
 
     result=$(docker exec cli.$ORG.$DOMAIN /bin/bash -c \
         'source container-scripts/lib/container-lib.sh; \
@@ -42,8 +21,10 @@ sleep 5
     if [ "$result" = "$CHAINCODE_NAME" ]; then
         
         printGreen "OK: $ORG reports the <$CHAINCODE_NAME> chaincode is sucsessfuly instantiated on the <$TEST_CHANNEL_NAME> channel."
+        exit 0
     else
         
         printError "ERROR: $ORG reports the <$CHAINCODE_NAME> chaincode failed to instantiate on the <$TEST_CHANNEL_NAME> channel."
         printError "See logs above."
+        exit 1
     fi
